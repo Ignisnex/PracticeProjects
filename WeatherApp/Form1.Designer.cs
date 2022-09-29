@@ -278,7 +278,7 @@ namespace WeatherApp
             this.locBox.Name = "locBox";
             this.locBox.Size = new System.Drawing.Size(344, 28);
             this.locBox.TabIndex = 2;
-            this.locBox.Text = "Lethbridge";
+            this.locBox.Text = "Lethbridge, CA";
             // 
             // btnExit
             // 

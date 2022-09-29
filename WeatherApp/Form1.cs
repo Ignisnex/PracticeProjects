@@ -62,7 +62,7 @@ namespace WeatherApp
             pnlNav.Left = btnToday.Left;
             btnToday.BackColor = Color.FromArgb(46, 51, 73);
 
-            RunLocationAsync("Lethbridge");
+            RunLocationAsync("Lethbridge, CA");
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -73,10 +73,10 @@ namespace WeatherApp
         private void RunLocationAsync(string loc)
         {
             HttpClient client = new HttpClient();
-            string cityName = loc;
-            //string countryCode = "CA";
+            string cityName = loc.Substring(0, loc.IndexOf(','));
+            string countryCode = loc[(loc.IndexOf(',') + 1)..];
             string apiCode = "ea6ae377f714bf4420b379e5c0331429";
-            string uriParams = "?q=" + cityName + "&limit=1&appid=" + apiCode;
+            string uriParams = "?q=" + cityName + ","+countryCode+"&limit=1&appid=" + apiCode;
             client.BaseAddress = new Uri("http://api.openweathermap.org/geo/1.0/direct");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
@@ -100,7 +100,7 @@ namespace WeatherApp
                 }
                 foreach (var d in dataObjects)
                 {
-                    RunWeatherAsync(d.lat, d.lon);
+                    RunWeatherWebclient(d.lat, d.lon);
                 }
             }
             else
@@ -111,7 +111,7 @@ namespace WeatherApp
 
         }
 
-        private void RunWeatherAsync(string lat, string lon)
+        private void RunWeatherWebclient(string lat, string lon)
         {
 
             string apiCode = "a527eb3eaeb949acc3b09adf3e958d59";
@@ -125,7 +125,7 @@ namespace WeatherApp
                 this.currentHumid.Text = (obj.main["humidity"]).ToString() + "%";
                 this.currentWind.Text = (obj.wind["speed"]*3.6).ToString("N0") + "km/h";
             }
-            baseUri = "https://api.openweathermap.org/data/2.5/forecast?";
+           /* baseUri = "https://api.openweathermap.org/data/2.5/forecast?";
             using (WebClient web = new WebClient())
             {
                 var json = web.DownloadString(baseUri + uriParams);
@@ -134,7 +134,7 @@ namespace WeatherApp
                 this.currentHumid.Text = (obj.main["humidity"]).ToString() + "%";
                 this.currentWind.Text = (obj.wind["speed"] * 3.6).ToString("N0") + "km/h";
             }
-
+           */
         }
 
         private void btnToday_Click(object sender, EventArgs e)
