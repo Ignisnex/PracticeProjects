@@ -48,6 +48,21 @@ namespace WeatherApp
             public IDictionary<string, float> wind { get; set; }
         }
 
+        public class ForecastResponse
+        {
+
+            public List<Forecast> list { get; set; }
+
+        }
+
+        public class Forecast
+        {
+            public double dt { get; set; }
+            public IDictionary<string, float> main { get; set; }
+            public List<Weather> weather { get; set; }
+            public IDictionary<string, float> wind { get; set; }
+        }
+
         public class Weather
         {
             public string main { get; set; }
@@ -124,17 +139,100 @@ namespace WeatherApp
                 this.currentTemp.Text = (obj.main["temp"]-273.15).ToString("N0")+ "°C";
                 this.currentHumid.Text = (obj.main["humidity"]).ToString() + "%";
                 this.currentWind.Text = (obj.wind["speed"]*3.6).ToString("N0") + "km/h";
+                foreach(var wea in obj.weather)
+                {
+                    this.currentCondition.Text = wea.main;
+                    this.currentConditionImg.Image = assignConditionImg(wea.main);
+                    this.sideConditionImg.Image = assignConditionImg(wea.main);
+                }
             }
-           /* baseUri = "https://api.openweathermap.org/data/2.5/forecast?";
+            baseUri = "https://api.openweathermap.org/data/2.5/forecast";
+            uriParams = "?lat=" + lat + "&lon=" + lon + "&cnt=8&appid=" + apiCode;
             using (WebClient web = new WebClient())
             {
                 var json = web.DownloadString(baseUri + uriParams);
-                var obj = JsonConvert.DeserializeObject<WeatherResponse>(json);
-                this.currentTemp.Text = (obj.main["temp"] - 273.15).ToString("N0") + "°C";
-                this.currentHumid.Text = (obj.main["humidity"]).ToString() + "%";
-                this.currentWind.Text = (obj.wind["speed"] * 3.6).ToString("N0") + "km/h";
+                var obj = JsonConvert.DeserializeObject<ForecastResponse>(json);           
+                IEnumerable<Panel> ctlPanels = hourForecast.Controls.OfType<Panel>();
+                foreach ( var panel in ctlPanels)
+                {
+                    IEnumerable<Label> labels = panel.Controls.OfType<Label>();
+                    foreach (var ctl in labels)
+                    {
+                        foreach (var fore in obj.list.Select((value, i) => (value, i)))
+                        {
+                            if (ctl.Name.StartsWith("hour") && ctl.Name.EndsWith(fore.i.ToString()))
+                            {
+                                ctl.Text = UnixTimeStampToHour(fore.value.dt);
+                            }
+                            else if (ctl.Name.StartsWith("temp") && ctl.Name.EndsWith(fore.i.ToString()))
+                            {
+                                ctl.Text = (fore.value.main["temp"] - 273.15).ToString("N0") + "°C";
+                            }
+                            else if (ctl.Name.StartsWith("humid") && ctl.Name.EndsWith(fore.i.ToString()))
+                            {
+                                ctl.Text = fore.value.main["humidity"].ToString() + "%";
+                            }
+                            else if (ctl.Name.StartsWith("wind") && ctl.Name.EndsWith(fore.i.ToString()))
+                            {
+                                ctl.Text = (fore.value.wind["speed"] * 3.6).ToString("N0") + "km/h";
+                            }
+                            foreach (var wea in fore.value.weather) {
+                                panel.Controls.OfType<PictureBox>().First().Image = assignConditionImg(wea.main);
+                            }
+                        }
+                        
+                    }
+                }
             }
-           */
+           
+        }
+
+        public static string UnixTimeStampToHour(double unixTimeStamp)
+        {
+            // Unix timestamp is seconds past epoch
+            DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            dateTime = dateTime.AddSeconds(unixTimeStamp).ToLocalTime();
+            return dateTime.ToString("h tt");
+        }
+
+        private Bitmap assignConditionImg(string cdn)
+        {
+
+            if (cdn == "Rain")
+            {
+                return WeatherApp.Properties.Resources._1530364_weather_rain_shower_storm_icon;
+            }
+            else if (cdn == "Clouds")
+            {
+                return WeatherApp.Properties.Resources._2995000_cloud_weather_cloudy_rain_sun_icon;
+            }
+            else if (cdn == "Drizzle")
+            {
+                return WeatherApp.Properties.Resources._1530365_weather_cloud_drizzel_rain_icon;
+            }
+            else if (cdn == "Thunderstorm")
+            {
+                return WeatherApp.Properties.Resources._1530363_weather_clouds_night_storm_icon;
+            }
+            else if (cdn == "Snow")
+            {
+                return WeatherApp.Properties.Resources._1530371_weather_clouds_snow_winter_icon;
+            }
+            else if (cdn == "Tornado")
+            {
+                return WeatherApp.Properties.Resources._1530366_weather_hurricane_storm_tornado_icon;
+            }
+            else if ((cdn == "Mist") || (cdn == "Haze") || (cdn == "Fog"))
+            {
+                return WeatherApp.Properties.Resources._1530368_weather_clouds_cloudy_fog_foggy_icon;
+            }
+            else if ((cdn == "Smoke") || (cdn == "Dust") || (cdn == "Sand") || (cdn == "Ash") || (cdn == "Squall"))
+            {
+                return WeatherApp.Properties.Resources._1530374_weather_day_sand_sandstorm_sun_icon;
+            }
+
+            return WeatherApp.Properties.Resources._1530392_weather_sun_sunny_temperature_icon;
+
         }
 
         private void btnToday_Click(object sender, EventArgs e)
