@@ -44,12 +44,10 @@ namespace WeatherApp
             this.panel3 = new System.Windows.Forms.Panel();
             this.currentConditionImg = new System.Windows.Forms.PictureBox();
             this.currentTemp = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.currentWindImg = new System.Windows.Forms.PictureBox();
             this.currentWind = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.hourForecast = new System.Windows.Forms.Panel();
             this.panel14 = new System.Windows.Forms.Panel();
@@ -104,7 +102,6 @@ namespace WeatherApp
             this.panel7 = new System.Windows.Forms.Panel();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.currentHumid = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.locFound = new System.Windows.Forms.Label();
@@ -165,6 +162,7 @@ namespace WeatherApp
             this.btnSettings.Text = "Settings";
             this.btnSettings.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnSettings.UseVisualStyleBackColor = true;
+            this.btnSettings.Visible = false;
             this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
             this.btnSettings.Leave += new System.EventHandler(this.btnSettings_Leave);
             // 
@@ -181,6 +179,7 @@ namespace WeatherApp
             this.btnHist.Text = "Weather Lookup";
             this.btnHist.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnHist.UseVisualStyleBackColor = true;
+            this.btnHist.Visible = false;
             this.btnHist.Click += new System.EventHandler(this.btnHist_Click);
             this.btnHist.Leave += new System.EventHandler(this.btnHist_Leave);
             // 
@@ -197,6 +196,7 @@ namespace WeatherApp
             this.btnWeek.Text = "Weekly Forecast";
             this.btnWeek.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnWeek.UseVisualStyleBackColor = true;
+            this.btnWeek.Visible = false;
             this.btnWeek.Click += new System.EventHandler(this.btnWeek_Click);
             this.btnWeek.Leave += new System.EventHandler(this.btnWeek_Leave);
             // 
@@ -298,7 +298,6 @@ namespace WeatherApp
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(42)))), ((int)(((byte)(64)))));
             this.panel3.Controls.Add(this.currentConditionImg);
             this.panel3.Controls.Add(this.currentTemp);
-            this.panel3.Controls.Add(this.label5);
             this.panel3.Controls.Add(this.label3);
             this.panel3.Location = new System.Drawing.Point(211, 88);
             this.panel3.Name = "panel3";
@@ -327,17 +326,6 @@ namespace WeatherApp
             this.currentTemp.TabIndex = 1;
             this.currentTemp.Text = "31 / -7";
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(158)))), ((int)(((byte)(161)))), ((int)(((byte)(176)))));
-            this.label5.Location = new System.Drawing.Point(12, 78);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(88, 25);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Humidity";
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -354,7 +342,6 @@ namespace WeatherApp
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(42)))), ((int)(((byte)(64)))));
             this.panel4.Controls.Add(this.currentWindImg);
             this.panel4.Controls.Add(this.currentWind);
-            this.panel4.Controls.Add(this.label7);
             this.panel4.Controls.Add(this.label8);
             this.panel4.Location = new System.Drawing.Point(543, 88);
             this.panel4.Name = "panel4";
@@ -382,17 +369,6 @@ namespace WeatherApp
             this.currentWind.Size = new System.Drawing.Size(110, 33);
             this.currentWind.TabIndex = 1;
             this.currentWind.Text = "27 / 18";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(158)))), ((int)(((byte)(161)))), ((int)(((byte)(176)))));
-            this.label7.Location = new System.Drawing.Point(12, 78);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(88, 25);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "Humidity";
             // 
             // label8
             // 
@@ -974,7 +950,6 @@ namespace WeatherApp
             this.panel7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(42)))), ((int)(((byte)(64)))));
             this.panel7.Controls.Add(this.pictureBox5);
             this.panel7.Controls.Add(this.currentHumid);
-            this.panel7.Controls.Add(this.label12);
             this.panel7.Controls.Add(this.label13);
             this.panel7.Location = new System.Drawing.Point(868, 88);
             this.panel7.Name = "panel7";
@@ -1002,17 +977,6 @@ namespace WeatherApp
             this.currentHumid.Size = new System.Drawing.Size(85, 33);
             this.currentHumid.TabIndex = 1;
             this.currentHumid.Text = "12 %";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(158)))), ((int)(((byte)(161)))), ((int)(((byte)(176)))));
-            this.label12.Location = new System.Drawing.Point(12, 78);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(88, 25);
-            this.label12.TabIndex = 0;
-            this.label12.Text = "Humidity";
             // 
             // label13
             // 
@@ -1140,12 +1104,10 @@ namespace WeatherApp
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.PictureBox currentConditionImg;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.PictureBox currentWindImg;
         private System.Windows.Forms.Label currentWind;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Panel hourForecast;
         private System.Windows.Forms.Panel panel6;
@@ -1156,7 +1118,6 @@ namespace WeatherApp
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.Label currentHumid;
-        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label currentCondition;
         private System.Windows.Forms.Label humidHour0;
